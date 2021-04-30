@@ -1,0 +1,70 @@
+header {
+    height: 20vh;
+    background-color: salmon;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    text-align: center;
+}
+
+h3{
+    text-align: center;
+    margin: 1rem;
+    border-bottom: 3px solid black;
+    padding-bottom: 1rem;
+}
+
+h4 {
+    text-align: center;
+    padding: 1rem;
+}
+
+div {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    padding: .5rem;
+    margin: 1rem;
+}
+
+form {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid black;
+    margin: .5rem ;
+    padding: 2rem 0;
+    line-height: 2rem;
+}
+
+input {
+    margin: 1rem;
+    width: 80%;
+    text-align: center;
+}
+
+.submit {
+    background-color: salmon;
+}
+
+.container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    border: 2px solid black;
+    width: fit-content;
+    margin: 1rem;
+    padding: 1rem;
+}

@@ -1,0 +1,22 @@
+{
+  "name": "hotrestaurant",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RyeBowTie/hotrestaurant.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RyeBowTie/hotrestaurant/issues"
+  },
+  "homepage": "https://github.com/RyeBowTie/hotrestaurant#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
