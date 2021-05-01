@@ -5,10 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="Description" content="Enter your description here"/>
-<link rel="stylesheet" href="reset.css">
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-<link rel="stylesheet" href="style.css">
+<style>
+header {
+    height: 20vh;
+    background-color: salmon;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    text-align: center;
+}
+h4 {
+    text-align: center;
+    padding: 1rem;
+}
+button {
+    padding: .5rem;
+    margin: 1rem;
+}
+div {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+}
+form {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid black;
+    margin: .5rem ;
+    padding: 2rem 0;
+    line-height: 2rem;
+}
+.submit {
+    background-color: salmon;
+}
+</style>
 <title>Reservations</title>
 </head>
 <body>
@@ -18,23 +57,53 @@
     <main>
         <h4>Make your reservation</h4>
         <div>
-            <button>Home</button>
-            <button>View Tables</button>
+            <a href="/"><button id="home">Home</button></a>
+            <a href="/tables"><button id="tables">View Tables</button></a>
         </div>
-        <form>
+        <form id="form" method="POST" role="form">
             <label>Name</label>
-            <input type="text">
+            <input type="text" id="name">
             <label>Phone Number</label>
-            <input type="text">
+            <input type="text" id="phone">
             <label>Email</label>
-            <input type="email">
+            <input type="email" id="email">
             <label>Unique ID</label>
-            <input type="text">
-            <input type="submit" class="submit">
+            <input type="text" id="unique">
+            <input type="submit" class="submit" id="submit">
         </form>
     </main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.4/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    const submit = $(".submit");
+    
+    submit.on("click", (event) => {
+        event.preventDefault();
+        let name = $("#name").val().trim();
+        let phone = $("#phone").val().trim();
+        let email  =$("#email").val().trim();
+        let unique = $("#unique").val().trim();
+
+        let newReservation = {
+            name: name,
+            phone: phone,
+            email: email,
+            ID: unique
+        };
+        
+        fetch('api/reserve', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newReservation),
+        })
+            .then((response) => response.json())
+            // .then((data) => console.log(data));
+
+    })
+</script>
 </body>
 </html>

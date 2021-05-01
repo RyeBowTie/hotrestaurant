@@ -5,10 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="Description" content="Enter your description here"/>
-<link rel="stylesheet" href="reset.css">
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-<link rel="stylesheet" href="style.css">
+<style>
+header {
+    height: 20vh;
+    background-color: salmon;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    text-align: center;
+}
+button {
+    padding: .5rem;
+    margin: 1rem;
+}
+div {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+}
+</style>
 <title>Hot Restaurant</title>
 </head>
 <body>
@@ -18,8 +40,8 @@
     <main>
         <h4>We only have 5 tables! Book your seat before they all are gone!</h4>
         <div>
-            <button>View Tables</button>
-            <button>Make A Reservation</button>
+            <a href="/tables"><button id="tables">View Tables</button></a>
+            51+<button id="reserve">Make A Reservation</button></a>
         </div>
     </main>
 

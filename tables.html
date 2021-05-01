@@ -5,10 +5,56 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="Description" content="Enter your description here"/>
-<link rel="stylesheet" href="./reset.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-<link rel="stylesheet" href="./style.css">
+<style>
+header {
+    height: 20vh;
+    background-color: salmon;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    text-align: center;
+}
+
+h3{
+    text-align: center;
+    margin: 1rem;
+    border-bottom: 3px solid black;
+    padding-bottom: 1rem;
+}
+
+h4 {
+    text-align: center;
+    padding: 1rem;
+}
+button {
+    padding: .5rem;
+    margin: 1rem;
+}
+div {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+}
+.container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    border: 2px solid black;
+    width: fit-content;
+    margin: 1rem;
+    padding: 1rem;
+}
+</style>
 <title>Tables</title>
 </head>
 <body>
@@ -18,72 +64,74 @@
     <main>
         <h4>Current Reservations and Waiting List</h4>
         <div>
-            <button>Home</button>
-            <button>Make A Reservation</button>
+            <a href="/"><button id="home">Home</button></a>
+            <a href="/reserve"><button id="reserve">Make A Reservation</button></a>
         </div>
         <h3>Reservations</h3>
-        <div class="container">
-            <div class="card">
-                <h5 class="name">Ryan O'Donohue</h5>
-                <h5 class="phone">(613) 316-7059</h5>
-                <h5 class="email">rod.odonohohue@gmail.com</h5>
-                <h5 class="unique">32435545</h5>
-            </div>
-            <div class="card">
-                <h5 class="name">Ryan O'Donohue</h5>
-                <h5 class="phone">(613) 316-7059</h5>
-                <h5 class="email">rod.odonohohue@gmail.com</h5>
-                <h5 class="unique">32435545</h5>
-            </div>
-            <div class="card">
-                <h5 class="name">Ryan O'Donohue</h5>
-                <h5 class="phone">(613) 316-7059</h5>
-                <h5 class="email">rod.odonohohue@gmail.com</h5>
-                <h5 class="unique">32435545</h5>
-            </div>
-            <div class="card">
-                <h5 class="name">Ryan O'Donohue</h5>
-                <h5 class="phone">(613) 316-7059</h5>
-                <h5 class="email">rod.odonohohue@gmail.com</h5>
-                <h5 class="unique">32435545</h5>
-            </div>
-            <div class="card">
-                <h5 class="name">Ryan O'Donohue</h5>
-                <h5 class="phone">(613) 316-7059</h5>
-                <h5 class="email">rod.odonohohue@gmail.com</h5>
-                <h5 class="unique">32435545</h5>
-            </div>
-            <div class="card">
-                <h5 class="name">Ryan O'Donohue</h5>
-                <h5 class="phone">(613) 316-7059</h5>
-                <h5 class="email">rod.odonohohue@gmail.com</h5>
-                <h5 class="unique">32435545</h5>
-            </div>
+        <div class="container reservation">
+    
         </div>
         <h3>Wait List</h3>
-        <div class="container">
-            <div class="card">
-                <h5 class="name">Ryan O'Donohue</h5>
-                <h5 class="phone">(613) 316-7059</h5>
-                <h5 class="email">rod.odonohohue@gmail.com</h5>
-                <h5 class="unique">32435545</h5>
-            </div>
-            <div class="card">
-                <h5 class="name">Ryan O'Donohue</h5>
-                <h5 class="phone">(613) 316-7059</h5>
-                <h5 class="email">rod.odonohohue@gmail.com</h5>
-                <h5 class="unique">32435545</h5>
-            </div>
-            <div class="card">
-                <h5 class="name">Ryan O'Donohue</h5>
-                <h5 class="phone">(613) 316-7059</h5>
-                <h5 class="email">rod.odonohohue@gmail.com</h5>
-                <h5 class="unique">32435545</h5>
-            </div>
+        <div class="container waitList">
+            
         </div>
     </main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.4/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    const reservationList = $(".reservation");
+    const waitList = $(".waitList");
+    
+    fetch('api/reserve', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data)
+            const reservationArray = [];
+            const waitListArray = [];
+            if (data.length < 5) {
+                for (let i = 0; i < data.length; i++) {
+                    const template = 
+                    `<div class="card">
+                        <h6 class="name">${data[i].name}</h6>
+                        <h6 class="phone">${data[i].phone}</h6>
+                        <h6 class="email">${data[i].email}</h6>
+                        <h6 class="ID">${data[i].ID}</h6>
+                    </div>`
+                    reservationArray.push(template);
+                }
+
+            } else if (data.length >= 5) {
+                for (let i = 0; i < 5; i++) {
+                    const template = 
+                    `<div class="card">
+                        <h6 class="name">${data[i].name}</h6>
+                        <h6 class="phone">${data[i].phone}</h6>
+                        <h6 class="email">${data[i].email}</h6>
+                        <h6 class="ID">${data[i].ID}</h6>
+                    </div>`
+                    reservationArray.push(template);
+                }
+                for (let i = 5; i < data.length; i++) {
+                    const template = 
+                    `<div class="card">
+                        <h6 class="name">${data[i].name}</h6>
+                        <h6 class="phone">${data[i].phone}</h6>
+                        <h6 class="email">${data[i].email}</h6>
+                        <h6 class="ID">${data[i].ID}</h6>
+                    </div>`
+                    waitListArray.push(template)  
+                }
+            }
+            waitList.html(waitListArray.join(''));
+            reservationList.html(reservationArray.join(''));  
+        })      
+</script>
 </body>
 </html>
